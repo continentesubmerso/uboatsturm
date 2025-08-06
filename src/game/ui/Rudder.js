@@ -33,4 +33,3 @@ export function createRudder(scene) {
 
     return { rudderBase, rudderSlider };
 }
-

@@ -12,4 +12,3 @@ export function createFireButton(scene) {
 
     return fireButton;
 }
-

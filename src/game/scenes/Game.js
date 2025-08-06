@@ -26,7 +26,7 @@ export class Game extends Scene {
 
     create() {
         this.enemies = [];
-        this.gameOver = false; // Resetar a flag de game over
+        this.gameOver = false; 
         this.corvettesSunk = 0;
         const width = this.cameras.main.width;
         const height = this.cameras.main.height;
@@ -48,15 +48,15 @@ export class Game extends Scene {
             height / 2,
             Math.PI / 2
         );
-        this.submarine.sprite.rotation = (3 * Math.PI) / 2; // Ajustar a rotação inicial do submarino
-        // Criar o medidor de bateria
+        this.submarine.sprite.rotation = (3 * Math.PI) / 2; 
+        
         this.batteryMeter = new BatteryMeter(
             this,
             this.cameras.main.width / 2,
             30
         );
 
-        // Passar o medidor de bateria para o submarino
+        
         this.submarine.setBatteryMeter(this.batteryMeter);
 
         if (!this.submarine.sprite) return;
@@ -122,13 +122,13 @@ export class Game extends Scene {
             return;
         }
 
-        // Permitir voltar para a superfície mesmo com a bateria esgotada
+        
         if (Phaser.Input.Keyboard.JustDown(this.cursors.d)) {
-            // Se estiver em modo dive, permitir voltar à superfície mesmo com bateria esgotada
+            
             if (this.submarine.isDiving) {
                 this.toggleDiveMode();
             }
-            // Se não estiver em modo dive, só permitir entrar se a bateria não estiver esgotada ou tiver carga suficiente
+            
             else if (
                 !this.submarine.isBatteryDepleted ||
                 this.submarine.batteryLevel > 5
@@ -308,9 +308,9 @@ export class Game extends Scene {
 
         this.isMoving = this.submarine.currentSpeed > 5;
         if (this.isMoving) {
-            //this.bubbleTimer += delta;
+            
             if (this.bubbleTimer > 150) {
-                //this.bubbleTimer = 0;
+                
                 if (this.isDiving) {
                     const offset = new Phaser.Math.Vector2(-30, 0).rotate(
                         this.submarine.rotation
@@ -456,7 +456,7 @@ export class Game extends Scene {
     toggleDiveMode() {
         if (!this.submarine.active || this.gameOver) return;
 
-        // Permitir voltar para a superfície mesmo com a bateria esgotada
+        
         if (this.submarine.isDiving) {
             this.isDiving = false;
             this.submarine.setDiveMode(false);
@@ -464,7 +464,7 @@ export class Game extends Scene {
             this.throttleBase.setFillStyle(0x808080);
             this.setupColliders();
         }
-        // Permitir entrar em modo dive apenas se a bateria não estiver esgotada ou tiver carga suficiente
+        
         else if (
             !this.submarine.isBatteryDepleted ||
             this.submarine.batteryLevel > 5
@@ -493,7 +493,7 @@ export class Game extends Scene {
         const torpedo = new Torpedo(this, x, y, angle);
         if (torpedo.sprite) {
             this.torpedoes.add(torpedo.sprite);
-            const speed = 85; // velocidade do torpedo
+            const speed = 85; 
             torpedo.sprite.body.setVelocity(
                 Math.cos(angle) * speed,
                 Math.sin(angle) * speed
@@ -503,9 +503,9 @@ export class Game extends Scene {
     }
 
     updateThrottle(newY) {
-        // Se estiver em modo dive e a bateria estiver esgotada, não permitir alterar o acelerador
+        
         if (this.submarine.isDiving && this.submarine.isBatteryDepleted) {
-            this.throttleHandle.y = this.throttleBottom; // Forçar para a posição mínima
+            this.throttleHandle.y = this.throttleBottom; 
             this.submarine.currentSpeed = 0;
             return;
         }
@@ -551,14 +551,14 @@ export class Game extends Scene {
     }
 
     showGameOver() {
-        this.gameOver = true; // Definir a flag de game over
+        this.gameOver = true; 
         const width = this.cameras.main.width;
         const height = this.cameras.main.height;
 
-        // Adicionar fundo semi-transparente
+        
         this.add.rectangle(width / 2, height / 2, width, height, 0x000000, 0.7);
 
-        // Adicionar texto "GAME OVER"
+        
         this.add
             .text(width / 2, height / 2 - 50, "GAME OVER", {
                 fontSize: "32px",
@@ -567,7 +567,7 @@ export class Game extends Scene {
             })
             .setOrigin(0.5);
 
-        // Adicionar texto com número de Corvettes afundadas
+        
         this.add
             .text(
                 width / 2,
@@ -581,7 +581,7 @@ export class Game extends Scene {
             )
             .setOrigin(0.5);
 
-        // Adicionar botão "Retry"
+        
         const retryButton = this.add
             .text(width / 2, height / 2 + 50, "Retry", {
                 fontSize: "24px",
@@ -593,7 +593,7 @@ export class Game extends Scene {
             .setOrigin(0.5)
             .setInteractive();
 
-        // Efeitos visuais para o botão
+        
         retryButton.on("pointerover", () => {
             retryButton.setStyle({ fill: "#ffff00" });
         });
@@ -601,10 +601,9 @@ export class Game extends Scene {
             retryButton.setStyle({ fill: "#ffffff" });
         });
 
-        // Evento de clique para reiniciar a cena
+        
         retryButton.on("pointerdown", () => {
             this.scene.restart();
         });
     }
 }
-

@@ -29,4 +29,3 @@ export function createThrottle(scene) {
     });
     return { throttleBase, throttleHandle };
 }
-

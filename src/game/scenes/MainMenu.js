@@ -10,12 +10,12 @@ export class MainMenu extends Scene {
     create() {
         this.cameras.main.setBackgroundColor(0x333333);
 
-        // Obter a largura da tela
+        
         const width = this.cameras.main.width;
         const height = this.cameras.main.height;
         this.add.image(width / 2, 100, "titulo").setOrigin(0.5);
 
-        // Adicionar o texto "START" centralizado horizontalmente
+        
         this.add
             .text(width / 2, height / 2, "START", {
                 fontFamily: "Arial Black",
@@ -28,10 +28,9 @@ export class MainMenu extends Scene {
             .setOrigin(0.5)
             .setDepth(100);
 
-        // Evento para iniciar o jogo
+        
         this.input.once("pointerdown", () => {
             this.scene.start("Help");
         });
     }
 }
-

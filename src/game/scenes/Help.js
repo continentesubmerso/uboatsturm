@@ -12,7 +12,7 @@ export class Help extends Scene {
     create() {
         this.cameras.main.setBackgroundColor(0x333333);
 
-        // Obter as dimensões da tela
+        
         const width = this.cameras.main.width;
         const height = this.cameras.main.height;
         this.add
@@ -27,13 +27,12 @@ export class Help extends Scene {
             .setOrigin(0.5)
             .setDepth(100);
 
-        // Adicionar a imagem centralizada
+        
         this.add.image(width / 2, height / 2, "uboat-help").setOrigin(0.5);
 
-        // Evento para iniciar o jogo
+        
         this.input.once("pointerdown", () => {
             this.scene.start("Game");
         });
     }
 }
-

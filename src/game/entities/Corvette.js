@@ -160,7 +160,7 @@ export class Corvette extends Enemy {
             if (projectile.sprite) {
                 this.scene.cannonProjectiles.add(projectile.sprite);
                 this.scene.physics.add.existing(projectile.sprite);
-                const speed = 250; //velocidade do projétil
+                const speed = 250; 
                 projectile.sprite.body.setVelocity(
                     Math.cos(angle) * speed,
                     Math.sin(angle) * speed
@@ -246,4 +246,3 @@ export class Corvette extends Enemy {
         super.destroy();
     }
 }
-
