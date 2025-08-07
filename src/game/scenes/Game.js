@@ -13,6 +13,10 @@ export class Game extends Scene {
     constructor() {
         super("Game");
         this.corvettesSunk = 0;
+        // Variáveis para controle de orientação
+        this.currentOrientation = null;
+        this.resizeHandler = null;
+        this.orientationHandler = null;
     }
 
     init() {
@@ -22,11 +26,74 @@ export class Game extends Scene {
             this.scale.width,
             this.scale.height
         );
+
+        // Detectar orientação inicial
+        this.currentOrientation = this.getOrientation();
+
+        // Configurar listeners para mudança de orientação
+        this.setupOrientationDetection();
+    }
+
+    // Método simples para detectar orientação
+    getOrientation() {
+        return window.innerWidth > window.innerHeight
+            ? "landscape"
+            : "portrait";
+    }
+
+    // Método para configurar detecção de orientação
+    setupOrientationDetection() {
+        // Listener para evento de resize
+        this.resizeHandler = () => {
+            this.scale.refresh();
+            this.checkOrientationChange();
+        };
+        window.addEventListener("resize", this.resizeHandler);
+
+        // Listener para evento de mudança de orientação
+        this.orientationHandler = () => {
+            this.scale.refresh();
+            this.time.delayedCall(300, () => {
+                this.checkOrientationChange();
+            });
+        };
+        window.addEventListener("orientationchange", this.orientationHandler);
+    }
+
+    // Método para verificar e agir sobre mudança de orientação
+    checkOrientationChange() {
+        const newOrientation = this.getOrientation();
+
+        // Se a orientação mudou, forçar refresh da página
+        if (newOrientation !== this.currentOrientation) {
+            this.currentOrientation = newOrientation;
+            this.forceRefresh();
+        }
+    }
+
+    // Método para forçar refresh da página
+    forceRefresh() {
+        // Limpar listeners
+        if (this.resizeHandler) {
+            window.removeEventListener("resize", this.resizeHandler);
+            this.resizeHandler = null;
+        }
+
+        if (this.orientationHandler) {
+            window.removeEventListener(
+                "orientationchange",
+                this.orientationHandler
+            );
+            this.orientationHandler = null;
+        }
+
+        // Forçar refresh da página
+        window.location.reload();
     }
 
     create() {
         this.enemies = [];
-        this.gameOver = false; 
+        this.gameOver = false;
         this.corvettesSunk = 0;
         const width = this.cameras.main.width;
         const height = this.cameras.main.height;
@@ -41,22 +108,22 @@ export class Game extends Scene {
             false,
             false
         );
+
         this.cameras.main.setBackgroundColor("#0000FF");
+
         this.submarine = new Submarine(
             this,
             width / 2,
             height / 2,
             Math.PI / 2
         );
-        this.submarine.sprite.rotation = (3 * Math.PI) / 2; 
-        
+        this.submarine.sprite.rotation = (3 * Math.PI) / 2;
+
         this.batteryMeter = new BatteryMeter(
             this,
             this.cameras.main.width / 2,
             30
         );
-
-        
         this.submarine.setBatteryMeter(this.batteryMeter);
 
         if (!this.submarine.sprite) return;
@@ -65,6 +132,7 @@ export class Game extends Scene {
         this.throttleBase = throttleBase;
         this.throttleHandle = throttleHandle;
         this.updateThrottle(this.throttleTop);
+
         const tenPercentPosition =
             this.throttleBottom -
             (this.throttleBottom - this.throttleTop) * 0.5;
@@ -87,14 +155,17 @@ export class Game extends Scene {
         );
 
         this.bubbleManager = new BubbleManager(this);
+
         this.torpedoes = this.physics.add.group({
             maxSize: 10,
             runChildUpdate: true,
         });
+
         this.cannonProjectiles = this.physics.add.group({
             classType: Phaser.GameObjects.Rectangle,
             runChildUpdate: true,
         });
+
         this.enemyGroup = this.physics.add.group();
         this.levelManager = new LevelManager(this);
         this.levelManager.spawnEnemy();
@@ -107,9 +178,11 @@ export class Game extends Scene {
             else if (gameObject === this.rudderSlider)
                 this.updateRudderSlider(dragX);
         });
+
         this.input.on("dragstart", (pointer, gameObject) => {
             if (gameObject === this.rudderSlider) this.isDraggingRudder = true;
         });
+
         this.input.on("dragend", (pointer, gameObject) => {
             if (gameObject === this.rudderSlider) this.isDraggingRudder = false;
         });
@@ -122,14 +195,10 @@ export class Game extends Scene {
             return;
         }
 
-        
         if (Phaser.Input.Keyboard.JustDown(this.cursors.d)) {
-            
             if (this.submarine.isDiving) {
                 this.toggleDiveMode();
-            }
-            
-            else if (
+            } else if (
                 !this.submarine.isBatteryDepleted ||
                 this.submarine.batteryLevel > 5
             ) {
@@ -165,6 +234,7 @@ export class Game extends Scene {
 
         const keyboardInput =
             this.cursors.left.isDown || this.cursors.right.isDown;
+
         if (!keyboardInput) {
             const angularDifference =
                 this.targetAngularVelocity -
@@ -211,7 +281,9 @@ export class Game extends Scene {
             -this.submarine.maxAngularVelocity,
             this.submarine.maxAngularVelocity
         );
+
         this.updateRudderSliderPosition();
+
         this.submarine.sprite.body.setAngularVelocity(
             this.submarine.currentSpeed > 0
                 ? this.submarine.currentAngularVelocity
@@ -222,11 +294,13 @@ export class Game extends Scene {
             this.updateThrottle(this.throttleHandle.y - 2);
         else if (this.cursors.down.isDown)
             this.updateThrottle(this.throttleHandle.y + 2);
+
         if (Phaser.Input.Keyboard.JustDown(this.cursors.space))
             this.fireTorpedo();
 
         const width = this.cameras.main.width;
         const height = this.cameras.main.height;
+
         this.torpedoes.children.iterate((torpedo) => {
             if (torpedo.active && torpedo.entity) {
                 if (
@@ -279,8 +353,10 @@ export class Game extends Scene {
             this.submarine.currentSpeed,
             this.submarine.sprite.body.velocity
         );
+
         this.submarine.x = Phaser.Math.Wrap(this.submarine.x, -50, width + 50);
         this.submarine.y = Phaser.Math.Wrap(this.submarine.y, -50, height + 50);
+
         this.enemies.forEach((enemy) => {
             if (enemy.active) {
                 if (isNaN(enemy.sprite.body.x) || isNaN(enemy.sprite.body.y)) {
@@ -307,10 +383,9 @@ export class Game extends Scene {
         });
 
         this.isMoving = this.submarine.currentSpeed > 5;
+
         if (this.isMoving) {
-            
             if (this.bubbleTimer > 150) {
-                
                 if (this.isDiving) {
                     const offset = new Phaser.Math.Vector2(-30, 0).rotate(
                         this.submarine.rotation
@@ -354,6 +429,7 @@ export class Game extends Scene {
         } else {
             this.bubbleTimer = 0;
         }
+
         this.bubbleManager.update(delta);
     }
 
@@ -434,7 +510,6 @@ export class Game extends Scene {
                     torpedo.body.enable = false;
                     this.bubbleManager.createExplosion(torpedo.x, torpedo.y);
                     torpedo.setActive(false).setVisible(false);
-
                     const targetEnemy = this.enemies.find(
                         (e) => e.sprite === enemy
                     );
@@ -456,16 +531,22 @@ export class Game extends Scene {
     toggleDiveMode() {
         if (!this.submarine.active || this.gameOver) return;
 
-        
         if (this.submarine.isDiving) {
             this.isDiving = false;
             this.submarine.setDiveMode(false);
             this.throttleHandle.setFillStyle(0xffffff);
             this.throttleBase.setFillStyle(0x808080);
+
+            const fiftyPercentPosition =
+                this.throttleBottom -
+                (this.throttleBottom - this.throttleTop) * 0.5;
+            this.throttleHandle.y = fiftyPercentPosition;
+
+            const maxSpeed = 60;
+            this.submarine.currentSpeed = maxSpeed * 0.5;
+
             this.setupColliders();
-        }
-        
-        else if (
+        } else if (
             !this.submarine.isBatteryDepleted ||
             this.submarine.batteryLevel > 5
         ) {
@@ -473,6 +554,7 @@ export class Game extends Scene {
             this.submarine.setDiveMode(true);
             this.throttleHandle.setFillStyle(0xff0000);
             this.throttleBase.setFillStyle(0x000000);
+
             this.setupColliders();
         }
     }
@@ -486,14 +568,16 @@ export class Game extends Scene {
             return;
 
         this.lastTorpedoTime = this.time.now;
+
         const x = this.submarine.x + Math.cos(this.submarine.rotation) * 30;
         const y = this.submarine.y + Math.sin(this.submarine.rotation) * 30;
         const angle = this.submarine.rotation;
 
         const torpedo = new Torpedo(this, x, y, angle);
+
         if (torpedo.sprite) {
             this.torpedoes.add(torpedo.sprite);
-            const speed = 85; 
+            const speed = 85;
             torpedo.sprite.body.setVelocity(
                 Math.cos(angle) * speed,
                 Math.sin(angle) * speed
@@ -503,9 +587,8 @@ export class Game extends Scene {
     }
 
     updateThrottle(newY) {
-        
         if (this.submarine.isDiving && this.submarine.isBatteryDepleted) {
-            this.throttleHandle.y = this.throttleBottom; 
+            this.throttleHandle.y = this.throttleBottom;
             this.submarine.currentSpeed = 0;
             return;
         }
@@ -515,6 +598,7 @@ export class Game extends Scene {
             this.throttleTop,
             this.throttleBottom
         );
+
         const maxSpeed = this.isDiving ? 27 : 60;
         this.submarine.currentSpeed = Phaser.Math.Linear(
             maxSpeed,
@@ -530,9 +614,11 @@ export class Game extends Scene {
             this.rudderLeft,
             this.rudderRight
         );
+
         const sliderPosition =
             (this.rudderSlider.x - this.rudderCenter) /
             ((this.rudderRight - this.rudderLeft) / 2);
+
         this.targetAngularVelocity =
             sliderPosition * this.submarine.maxAngularVelocity;
     }
@@ -541,24 +627,24 @@ export class Game extends Scene {
         const sliderPosition =
             this.submarine.currentAngularVelocity /
             this.submarine.maxAngularVelocity;
+
         this.rudderSlider.x = Phaser.Math.Clamp(
             this.rudderCenter +
                 (sliderPosition * (this.rudderRight - this.rudderLeft)) / 2,
             this.rudderLeft,
             this.rudderRight
         );
+
         this.submarine.updateRudder(-sliderPosition);
     }
 
     showGameOver() {
-        this.gameOver = true; 
+        this.gameOver = true;
         const width = this.cameras.main.width;
         const height = this.cameras.main.height;
 
-        
         this.add.rectangle(width / 2, height / 2, width, height, 0x000000, 0.7);
 
-        
         this.add
             .text(width / 2, height / 2 - 50, "GAME OVER", {
                 fontSize: "32px",
@@ -567,7 +653,6 @@ export class Game extends Scene {
             })
             .setOrigin(0.5);
 
-        
         this.add
             .text(
                 width / 2,
@@ -581,7 +666,6 @@ export class Game extends Scene {
             )
             .setOrigin(0.5);
 
-        
         const retryButton = this.add
             .text(width / 2, height / 2 + 50, "Retry", {
                 fontSize: "24px",
@@ -593,17 +677,35 @@ export class Game extends Scene {
             .setOrigin(0.5)
             .setInteractive();
 
-        
         retryButton.on("pointerover", () => {
             retryButton.setStyle({ fill: "#ffff00" });
         });
+
         retryButton.on("pointerout", () => {
             retryButton.setStyle({ fill: "#ffffff" });
         });
 
-        
         retryButton.on("pointerdown", () => {
             this.scene.restart();
         });
+    }
+
+    // Método para limpar recursos quando a cena for destruída
+    destroy() {
+        // Remover listeners de evento
+        if (this.resizeHandler) {
+            window.removeEventListener("resize", this.resizeHandler);
+            this.resizeHandler = null;
+        }
+
+        if (this.orientationHandler) {
+            window.removeEventListener(
+                "orientationchange",
+                this.orientationHandler
+            );
+            this.orientationHandler = null;
+        }
+
+        super.destroy();
     }
 }
