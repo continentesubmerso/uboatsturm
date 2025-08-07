@@ -1,0 +1,207 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="image-rendering: pixelated;">
+  <!-- Background - Deep Ocean in pixel blocks -->
+  <defs>
+    <!-- Pixel patterns -->
+    <pattern id="waterPattern" patternUnits="userSpaceOnUse" width="8" height="8">
+      <rect width="8" height="8" fill="#1e3a5f"/>
+      <rect x="0" y="6" width="8" height="2" fill="#0d2a42"/>
+    </pattern>
+  </defs>
+  
+  <!-- Ocean background layers -->
+  <rect width="512" height="512" fill="#0a1c2e"/>
+  <rect width="512" height="384" fill="#1e3a5f"/>
+  <rect width="512" height="256" fill="#2563eb" opacity="0.3"/>
+  
+  <!-- Water surface - pixelated waves -->
+  <rect x="0" y="48" width="64" height="16" fill="#3b82f6"/>
+  <rect x="64" y="56" width="64" height="16" fill="#3b82f6"/>
+  <rect x="128" y="48" width="64" height="16" fill="#3b82f6"/>
+  <rect x="192" y="40" width="64" height="16" fill="#3b82f6"/>
+  <rect x="256" y="48" width="64" height="16" fill="#3b82f6"/>
+  <rect x="320" y="56" width="64" height="16" fill="#3b82f6"/>
+  <rect x="384" y="48" width="64" height="16" fill="#3b82f6"/>
+  <rect x="448" y="40" width="64" height="16" fill="#3b82f6"/>
+  
+  <!-- Sunlight rays - pixelated -->
+  <g opacity="0.2">
+    <rect x="96" y="0" width="8" height="200" fill="#60a5fa"/>
+    <rect x="104" y="0" width="8" height="176" fill="#60a5fa"/>
+    <rect x="112" y="0" width="8" height="192" fill="#60a5fa"/>
+    
+    <rect x="192" y="0" width="8" height="240" fill="#60a5fa"/>
+    <rect x="200" y="0" width="8" height="224" fill="#60a5fa"/>
+    <rect x="208" y="0" width="8" height="232" fill="#60a5fa"/>
+    
+    <rect x="336" y="0" width="8" height="160" fill="#60a5fa"/>
+    <rect x="344" y="0" width="8" height="144" fill="#60a5fa"/>
+    <rect x="352" y="0" width="8" height="152" fill="#60a5fa"/>
+  </g>
+  
+  <!-- U-boat submarine - pixel art style -->
+  <g transform="translate(64, 220)">
+    <!-- Main hull -->
+    <rect x="16" y="32" width="320" height="16" fill="#4b5563"/>
+    <rect x="24" y="24" width="304" height="8" fill="#6b7280"/>
+    <rect x="32" y="48" width="288" height="8" fill="#374151"/>
+    <rect x="8" y="40" width="24" height="8" fill="#4b5563"/>
+    <rect x="336" y="40" width="24" height="8" fill="#4b5563"/>
+    
+    <!-- Rounded ends -->
+    <rect x="0" y="40" width="8" height="8" fill="#6b7280"/>
+    <rect x="360" y="40" width="8" height="8" fill="#6b7280"/>
+    
+    <!-- Conning tower -->
+    <rect x="144" y="8" width="80" height="24" fill="#4b5563"/>
+    <rect x="152" y="0" width="64" height="16" fill="#6b7280"/>
+    <rect x="160" y="16" width="48" height="8" fill="#9ca3af"/>
+    
+    <!-- Periscope -->
+    <rect x="184" y="-8" width="8" height="16" fill="#9ca3af"/>
+    <rect x="184" y="-16" width="8" height="8" fill="#fbbf24"/>
+    
+    <!-- Hull details -->
+    <rect x="48" y="28" width="8" height="4" fill="#374151"/>
+    <rect x="80" y="28" width="8" height="4" fill="#374151"/>
+    <rect x="112" y="28" width="8" height="4" fill="#374151"/>
+    <rect x="272" y="28" width="8" height="4" fill="#374151"/>
+    <rect x="304" y="28" width="8" height="4" fill="#374151"/>
+    
+    <!-- Propeller -->
+    <rect x="368" y="36" width="16" height="16" fill="#6b7280"/>
+    <rect x="372" y="40" width="8" height="8" fill="#9ca3af"/>
+    <rect x="360" y="44" width="8" height="8" fill="#9ca3af"/>
+    <rect x="384" y="44" width="8" height="8" fill="#9ca3af"/>
+  </g>
+  
+  <!-- Torpedo being fired -->
+  <g transform="translate(32, 268)">
+    <rect x="0" y="0" width="40" height="8" fill="#ef4444"/>
+    <rect x="40" y="2" width="8" height="4" fill="#dc2626"/>
+    <rect x="48" y="3" width="4" height="2" fill="#fbbf24"/>
+    
+    <!-- Torpedo trail bubbles -->
+    <rect x="-16" y="2" width="8" height="8" fill="#ffffff" opacity="0.6"/>
+    <rect x="-32" y="0" width="8" height="8" fill="#ffffff" opacity="0.4"/>
+    <rect x="-48" y="4" width="4" height="4" fill="#ffffff" opacity="0.2"/>
+  </g>
+  
+  <!-- Enemy ship at surface -->
+  <g transform="translate(320, 32)">
+    <rect x="0" y="8" width="96" height="16" fill="#1f2937"/>
+    <rect x="16" y="0" width="16" height="8" fill="#1f2937"/>
+    <rect x="48" y="-8" width="8" height="8" fill="#1f2937"/>
+    <rect x="64" y="-16" width="8" height="16" fill="#1f2937"/>
+    <!-- Ship details -->
+    <rect x="8" y="12" width="4" height="4" fill="#374151"/>
+    <rect x="16" y="12" width="4" height="4" fill="#374151"/>
+    <rect x="76" y="12" width="4" height="4" fill="#374151"/>
+  </g>
+  
+  <!-- Explosion - pixel art style -->
+  <g transform="translate(368, 16)">
+    <rect x="0" y="8" width="8" height="8" fill="#fbbf24"/>
+    <rect x="8" y="0" width="8" height="8" fill="#fb923c"/>
+    <rect x="16" y="8" width="8" height="8" fill="#ef4444"/>
+    <rect x="8" y="16" width="8" height="8" fill="#fb923c"/>
+    <rect x="8" y="8" width="8" height="8" fill="#fbbf24"/>
+    <rect x="-8" y="8" width="8" height="8" fill="#ef4444"/>
+    <rect x="24" y="8" width="8" height="8" fill="#ef4444"/>
+    <rect x="8" y="-8" width="8" height="8" fill="#ef4444"/>
+    <rect x="8" y="24" width="8" height="8" fill="#ef4444"/>
+  </g>
+  
+  <!-- Sea bubbles - pixelated -->
+  <rect x="96" y="320" width="8" height="8" fill="#ffffff" opacity="0.4"/>
+  <rect x="128" y="352" width="8" height="8" fill="#ffffff" opacity="0.3"/>
+  <rect x="176" y="304" width="4" height="4" fill="#ffffff" opacity="0.2"/>
+  <rect x="208" y="368" width="8" height="8" fill="#ffffff" opacity="0.4"/>
+  <rect x="288" y="336" width="4" height="4" fill="#ffffff" opacity="0.2"/>
+  <rect x="336" y="384" width="8" height="8" fill="#ffffff" opacity="0.3"/>
+  <rect x="112" y="392" width="4" height="4" fill="#ffffff" opacity="0.2"/>
+  <rect x="264" y="376" width="4" height="4" fill="#ffffff" opacity="0.2"/>
+  
+  <!-- Sea floor elements -->
+  <rect x="64" y="464" width="96" height="16" fill="#0f172a" opacity="0.6"/>
+  <rect x="256" y="472" width="128" height="24" fill="#0f172a" opacity="0.5"/>
+  <rect x="416" y="456" width="64" height="12" fill="#0f172a" opacity="0.6"/>
+  
+  <!-- Small coral/rocks -->
+  <rect x="80" y="456" width="8" height="8" fill="#1f2937" opacity="0.4"/>
+  <rect x="96" y="448" width="4" height="16" fill="#1f2937" opacity="0.4"/>
+  <rect x="280" y="464" width="8" height="8" fill="#1f2937" opacity="0.4"/>
+  <rect x="304" y="456" width="4" height="16" fill="#1f2937" opacity="0.4"/>
+  
+  <!-- Game title - pixel font style -->
+  <g transform="translate(128, 400)">
+    <!-- U-BOAT in white -->
+    <g fill="#ffffff">
+      <!-- U -->
+      <rect x="0" y="0" width="8" height="40" fill="#ffffff"/>
+      <rect x="24" y="0" width="8" height="40" fill="#ffffff"/>
+      <rect x="8" y="32" width="16" height="8" fill="#ffffff"/>
+      
+      <!-- - -->
+      <rect x="40" y="16" width="16" height="8" fill="#ffffff"/>
+      
+      <!-- B -->
+      <rect x="64" y="0" width="8" height="40" fill="#ffffff"/>
+      <rect x="72" y="0" width="16" height="8" fill="#ffffff"/>
+      <rect x="72" y="16" width="16" height="8" fill="#ffffff"/>
+      <rect x="72" y="32" width="16" height="8" fill="#ffffff"/>
+      <rect x="88" y="8" width="8" height="8" fill="#ffffff"/>
+      <rect x="88" y="24" width="8" height="8" fill="#ffffff"/>
+      
+      <!-- O -->
+      <rect x="104" y="0" width="24" height="8" fill="#ffffff"/>
+      <rect x="104" y="32" width="24" height="8" fill="#ffffff"/>
+      <rect x="104" y="8" width="8" height="24" fill="#ffffff"/>
+      <rect x="120" y="8" width="8" height="24" fill="#ffffff"/>
+      
+      <!-- A -->
+      <rect x="136" y="8" width="24" height="8" fill="#ffffff"/>
+      <rect x="136" y="16" width="24" height="8" fill="#ffffff"/>
+      <rect x="136" y="24" width="8" height="16" fill="#ffffff"/>
+      <rect x="152" y="24" width="8" height="16" fill="#ffffff"/>
+      <rect x="144" y="0" width="8" height="8" fill="#ffffff"/>
+      
+      <!-- T -->
+      <rect x="168" y="0" width="24" height="8" fill="#ffffff"/>
+      <rect x="176" y="8" width="8" height="32" fill="#ffffff"/>
+    </g>
+    
+    <!-- STURM in gold -->
+    <g transform="translate(48, 48)" fill="#fbbf24">
+      <!-- S -->
+      <rect x="0" y="0" width="16" height="8" fill="#fbbf24"/>
+      <rect x="0" y="16" width="16" height="8" fill="#fbbf24"/>
+      <rect x="0" y="32" width="16" height="8" fill="#fbbf24"/>
+      <rect x="0" y="8" width="8" height="8" fill="#fbbf24"/>
+      <rect x="8" y="24" width="8" height="8" fill="#fbbf24"/>
+      
+      <!-- T -->
+      <rect x="24" y="0" width="24" height="8" fill="#fbbf24"/>
+      <rect x="32" y="8" width="8" height="32" fill="#fbbf24"/>
+      
+      <!-- U -->
+      <rect x="56" y="0" width="8" height="32" fill="#fbbf24"/>
+      <rect x="80" y="0" width="8" height="32" fill="#fbbf24"/>
+      <rect x="64" y="32" width="16" height="8" fill="#fbbf24"/>
+      
+      <!-- R -->
+      <rect x="96" y="0" width="8" height="40" fill="#fbbf24"/>
+      <rect x="104" y="0" width="16" height="8" fill="#fbbf24"/>
+      <rect x="104" y="16" width="16" height="8" fill="#fbbf24"/>
+      <rect x="120" y="8" width="8" height="8" fill="#fbbf24"/>
+      <rect x="112" y="24" width="8" height="8" fill="#fbbf24"/>
+      <rect x="120" y="32" width="8" height="8" fill="#fbbf24"/>
+      
+      <!-- M -->
+      <rect x="136" y="0" width="8" height="40" fill="#fbbf24"/>
+      <rect x="168" y="0" width="8" height="40" fill="#fbbf24"/>
+      <rect x="144" y="0" width="8" height="8" fill="#fbbf24"/>
+      <rect x="160" y="0" width="8" height="8" fill="#fbbf24"/>
+      <rect x="152" y="8" width="8" height="16" fill="#fbbf24"/>
+    </g>
+  </g>
+</svg>
