@@ -29,49 +29,6 @@
 -   **Language:** JavaScript
 -   **Bundler:** [Vite](https://vitejs.dev/)
 
-## How to Run
-
-To run the project locally, follow these steps:
-
-1.  **Clone the repository:**
-
-    ```bash
-    git clone https://github.com/continentesubmerso/uboatsturm.git
-    ```
-
-2.  **Install the dependencies:**
-
-    ```bash
-    npm install
-    ```
-
-3.  **Start the development server:**
-
-    ```bash
-    npm run dev
-    ```
-
-4.  Open your browser and access the address provided by Vite (usually `http://localhost:5173`).
-
-## Project Structure
-
-```
-/
-├── public/             # Static files (images, CSS)
-├── src/
-│   ├── components/     # React components
-│   ├── game/           # Phaser game logic
-│   │   ├── entities/   # Game entities (submarine, enemies)
-│   │   ├── scenes/     # Game scenes (menu, main game)
-│   │   ├── systems/    # Management systems (levels, particles)
-│   │   └── ui/         # Game UI elements
-│   ├── App.jsx         # Main React component
-│   └── main.jsx        # Application entry point
-├── index.html          # Main HTML file
-├── package.json        # Project dependencies and scripts
-└── vite/               # Vite configurations
-```
-
 ## License
 
 U-BOAT STURM is licensed under the GPLv3.
