@@ -1,1 +1,1 @@
-(SECUSO) Try to reach 2048 in this puzzle game
+Command a U-boat in this 2D submarine simulation and sink your enemies.
